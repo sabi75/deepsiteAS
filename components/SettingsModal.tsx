@@ -13,7 +13,7 @@ export const AVAILABLE_MODELS: AIModel[] = [
   // Gemini
   { id: 'gemini-3-pro-preview', name: 'Gemini 3 Pro', provider: 'gemini' },
   { id: 'gemini-3-flash-preview', name: 'Gemini 3 Flash', provider: 'gemini' },
-  // OpenRouter (10 models)
+  // OpenRouter (12 models now including DeepSeek variants)
   { id: 'openai/gpt-4o', name: 'GPT-4o (OpenRouter)', provider: 'openrouter' },
   { id: 'openai/gpt-4o-mini', name: 'GPT-4o Mini (OpenRouter)', provider: 'openrouter' },
   { id: 'anthropic/claude-3.5-sonnet', name: 'Claude 3.5 Sonnet (OpenRouter)', provider: 'openrouter' },
@@ -24,10 +24,12 @@ export const AVAILABLE_MODELS: AIModel[] = [
   { id: 'mistralai/mistral-large', name: 'Mistral Large (OpenRouter)', provider: 'openrouter' },
   { id: 'perplexity/sonar-reasoning', name: 'Perplexity Sonar (OpenRouter)', provider: 'openrouter' },
   { id: 'qwen/qwen-2.5-72b-instruct', name: 'Qwen 2.5 72B (OpenRouter)', provider: 'openrouter' },
-  // DeepSeek (3 models)
-  { id: 'deepseek-chat', name: 'DeepSeek Chat (V3)', provider: 'deepseek' },
-  { id: 'deepseek-coder', name: 'DeepSeek Coder', provider: 'deepseek' },
-  { id: 'deepseek-reasoner', name: 'DeepSeek Reasoner', provider: 'deepseek' },
+  { id: 'deepseek/deepseek-chat', name: 'DeepSeek V3 (OpenRouter)', provider: 'openrouter' },
+  { id: 'deepseek/deepseek-r1', name: 'DeepSeek R1 (OpenRouter)', provider: 'openrouter' },
+  // DeepSeek Direct (3 models)
+  { id: 'deepseek-chat', name: 'DeepSeek Chat (V3) Direct', provider: 'deepseek' },
+  { id: 'deepseek-coder', name: 'DeepSeek Coder Direct', provider: 'deepseek' },
+  { id: 'deepseek-reasoner', name: 'DeepSeek Reasoner Direct', provider: 'deepseek' },
 ];
 
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, settings, onSave }) => {
@@ -90,7 +92,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, settings
           {/* API Keys */}
           {localSettings.provider === 'openrouter' && (
             <div className="space-y-2 animate-in slide-in-from-top-2 duration-200">
-              <label className="text-xs font-bold text-[#7d8590] uppercase tracking-wider">OpenRouter API Key</label>
+              <div className="flex justify-between items-center">
+                <label className="text-xs font-bold text-[#7d8590] uppercase tracking-wider">OpenRouter API Key</label>
+                <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" className="text-[10px] text-blue-400 hover:underline">Get Key</a>
+              </div>
               <input
                 type="password"
                 value={localSettings.openRouterKey}
@@ -103,7 +108,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, settings
 
           {localSettings.provider === 'deepseek' && (
             <div className="space-y-2 animate-in slide-in-from-top-2 duration-200">
-              <label className="text-xs font-bold text-[#7d8590] uppercase tracking-wider">DeepSeek API Key</label>
+              <div className="flex justify-between items-center">
+                <label className="text-xs font-bold text-[#7d8590] uppercase tracking-wider">DeepSeek API Key</label>
+                <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener noreferrer" className="text-[10px] text-blue-400 hover:underline">Get Key</a>
+              </div>
               <input
                 type="password"
                 value={localSettings.deepSeekKey}
